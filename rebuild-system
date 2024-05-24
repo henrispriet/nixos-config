@@ -29,13 +29,18 @@ echo "NixOS Rebuilding..."
 
 # Rebuild, output simplified errors, log trackebacks
 logfile=$(mktemp)
-sudo nixos-rebuild switch --flake .#myNixos &>$logfile || (cat $logfile | grep --color error && echo "full logs can be found in $logfile" && exit 1)
+# make sure new files are detected by the rebuild
+git add .
+sudo nixos-rebuild switch --flake .#myNixos &>$logfile || \
+(cat $logfile | grep --color error \
+&& echo "full logs can be found in $logfile" \
+&& git restore --staged .\
+&& exit 1)
 
 # Get current generation metadata
 current=$(nixos-rebuild list-generations | grep current | cut -d " " -f 1)
 
 # Commit all changes witih the generation metadata
-git add .
 git commit -m "generation ${current}"
 
 # Back to where you were
