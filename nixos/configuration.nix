@@ -120,6 +120,11 @@
     libnotify
   ];
 
+  # Stylix
+  # TODO: move to stylix file/folder
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
+  stylix.image = ./spaceship.jpg;
+
   # Fonts
   fonts = {
     enableDefaultPackages = true;
