@@ -120,6 +120,24 @@
     libnotify
   ];
 
+  # Fonts
+  fonts = {
+    enableDefaultPackages = true;
+    packages = with pkgs; [
+      intel-one-mono
+      (nerdfonts.override {fonts = ["IntelOneMono"];})
+    ];
+
+    fontDir.enable = true;
+    fontconfig = {
+      defaultFonts = {
+        serif = ["Intel One Mono"];
+        sansSerif = ["Intel One Mono"];
+        monospace = ["Intel One Mono"];
+      };
+    };
+  };
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
