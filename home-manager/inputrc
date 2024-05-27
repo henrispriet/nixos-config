@@ -1,0 +1,30 @@
+# Based on https://github.com/jdpedersen1/dotfiles/blob/369a2e729042e2cd9dfb0d395a95a90c6b2a182d/.inputrc
+# Prettyfi
+set colored-stats on
+set colored-completion-prefix on
+
+# Completion settings
+set show-all-if-ambiguous on
+set completion-ignore-case on
+set completion-map-case on
+set completion-display-width 0
+# set completion-query-items 1000
+
+# ^C no longer shows on C-c keypress
+# set echo-control-characters off
+
+# Command history search
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+
+# Move foreward/backward by word
+"\e[1;5D": backward-word
+"\e[1;5C": forward-word
+
+# Bash Keybindings
+"\C-f":"cd ~/nixos-config/\n"
+"\C-b":"cd ..\n"
+"\C-h":"cd ~\n"
+# alt-s to prepend sudo
+"\es":"\C-asudo \C-e"
+# "\C-x":"sourceb\n clear\n"

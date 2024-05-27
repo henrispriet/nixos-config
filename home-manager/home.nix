@@ -70,9 +70,29 @@
   #  /etc/profiles/per-user/henri/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    EDITOR = "vim";
   };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  programs.bash = {
+    enable = true;
+
+    shellAliases = {
+      ls = "${pkgs.lsd}/bin/lsd";
+      gg = "${pkgs.lazygit}/bin/lazygit";
+    };
+
+    historyIgnore = [
+      "ls"
+      "cd"
+      "exit"
+      "gg"
+    ];
+
+    initExtra = ''
+      bind -f ${./inputrc}
+    '';
+  };
 }
