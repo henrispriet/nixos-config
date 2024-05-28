@@ -89,6 +89,7 @@
     packages = with pkgs; [
       #  firefox
       #  thunderbird
+      netflix
     ];
   };
 
@@ -115,7 +116,12 @@
     wget
     git
     lazygit
+    fd
+    ripgrep
+    bat
+
     librewolf
+
     alejandra
     libnotify
   ];
