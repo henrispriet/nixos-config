@@ -124,23 +124,22 @@
   # TODO: move to stylix file/folder
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
   stylix.image = ./spaceship.jpg;
+  stylix.fonts = {
+    # packages = with pkgs; [
+    #   (nerdfonts.override {fonts = ["IntelOneMono"];})
+    # ];
 
-  # Fonts
-  fonts = {
-    enableDefaultPackages = true;
-    packages = with pkgs; [
-      intel-one-mono
-      (nerdfonts.override {fonts = ["IntelOneMono"];})
-    ];
-
-    fontDir.enable = true;
-    fontconfig = {
-      defaultFonts = {
-        serif = ["Intel One Mono"];
-        sansSerif = ["Intel One Mono"];
-        monospace = ["Intel One Mono"];
-      };
+    monospace = {
+      package = pkgs.nerdfonts.override {fonts = ["IntelOneMono"];};
+      name = "Intone Mono NF";
     };
+    # serif = config.stylix.fonts.monospace;
+    # sansSerif = config.stylix.fonts.monospace;
+    # emoji = config.stylix.fonts.monospace;
+  };
+  stylix.cursor = {
+    package = pkgs.bibata-cursors;
+    name = "Bibata Modern Classic";
   };
 
   # Some programs need SUID wrappers, can be configured further or are

@@ -84,6 +84,7 @@
       gg = "${pkgs.lazygit}/bin/lazygit";
     };
 
+    historyControl = ["erasedups"];
     historyIgnore = [
       "ls"
       "cd"
