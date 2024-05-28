@@ -146,8 +146,8 @@
   # some cursors don't work
   # see: https://github.com/danth/stylix/issues/359
   stylix.cursor = {
-    name = "Adwaita";
-    package = pkgs.gnome.adwaita-icon-theme;
+    package = pkgs.quintom-cursor-theme;
+    name = "Quintom_Ink";
   };
 
   # Some programs need SUID wrappers, can be configured further or are
