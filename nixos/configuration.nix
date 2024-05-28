@@ -90,6 +90,14 @@
       #  firefox
       #  thunderbird
       netflix
+      youtube-tui
+      mpv
+      (pkgs.discord.override {
+        # remove any overrides that you don't want
+        withOpenASAR = true;
+        withVencord = true;
+      })
+      spotify
     ];
   };
 
@@ -121,6 +129,8 @@
     bat
 
     librewolf
+    vlc
+    keepassxc
 
     alejandra
     libnotify

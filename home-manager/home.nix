@@ -76,6 +76,8 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  # TODO: write module for vencord to auto import/export config to make it ~declarative~
+
   programs.bash = {
     enable = true;
 
