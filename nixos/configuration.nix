@@ -143,9 +143,11 @@
     # sansSerif = config.stylix.fonts.monospace;
     # emoji = config.stylix.fonts.monospace;
   };
+  # some cursors don't work
+  # see: https://github.com/danth/stylix/issues/359
   stylix.cursor = {
-    package = pkgs.bibata-cursors;
-    name = "Bibata Modern Classic";
+    name = "Adwaita";
+    package = pkgs.gnome.adwaita-icon-theme;
   };
 
   # Some programs need SUID wrappers, can be configured further or are
