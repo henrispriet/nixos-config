@@ -86,14 +86,13 @@
     isNormalUser = true;
     description = "Henri Spriet";
     extraGroups = ["networkmanager" "wheel"];
+    # TODO: move these to home-manager probably
     packages = with pkgs; [
-      #  firefox
-      #  thunderbird
+      # thunderbird
       netflix
       youtube-tui
-      mpv
+      mpv # required by youtube-tui to play videos
       (pkgs.discord.override {
-        # remove any overrides that you don't want
         withOpenASAR = true;
         withVencord = true;
       })
@@ -120,18 +119,23 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    # utils
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
+    curl
     git
     lazygit
     fd
     ripgrep
     bat
 
+    # desktop apps
     librewolf
     vlc
     keepassxc
 
+    # required by rebuild script
+    # TODO: put implicitly into rebuild script
     alejandra
     libnotify
   ];

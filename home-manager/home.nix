@@ -70,6 +70,7 @@
   #  /etc/profiles/per-user/henri/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
+    # doesn't actually work for some reason
     EDITOR = "vim";
   };
 
