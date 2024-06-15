@@ -96,7 +96,7 @@
         withOpenASAR = true;
         withVencord = true;
       })
-      spotify
+      spotube
     ];
   };
 
