@@ -125,9 +125,11 @@
     curl
     git
     lazygit
+    tree
     fd
     ripgrep
     bat
+    direnv
 
     # desktop apps
     librewolf
