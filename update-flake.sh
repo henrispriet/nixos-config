@@ -25,9 +25,9 @@ if git diff --quiet 'flake.lock'; then
 echo "NixOS Rebuilding..."
 # Rebuild, output simplified errors, log trackebacks
 logfile=$(mktemp)
+echo "(full logs can be found in $logfile)"
 sudo nixos-rebuild switch --flake .#myNixos &>$logfile || \
 (cat $logfile | grep --color error \
-&& echo "full logs can be found in $logfile" \
 && git restore --staged .\
 && exit 1)
 

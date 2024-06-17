@@ -29,11 +29,11 @@ echo "NixOS Rebuilding..."
 
 # Rebuild, output simplified errors, log trackebacks
 logfile=$(mktemp)
+echo "(full logs can be found in $logfile)"
 # make sure new files are detected by the rebuild
 git add .
 sudo nixos-rebuild switch --flake .#myNixos &>$logfile || \
 (cat $logfile | grep --color error \
-&& echo "full logs can be found in $logfile" \
 && git restore --staged .\
 && exit 1)
 
