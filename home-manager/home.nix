@@ -77,28 +77,9 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  imports = [
+    ./bash/bash.nix
+  ];
+
   # TODO: write module for vencord to auto import/export config to make it ~declarative~
-
-  programs.bash = {
-    enable = true;
-
-    shellAliases = {
-      ls = "${pkgs.lsd}/bin/lsd";
-      gg = "${pkgs.lazygit}/bin/lazygit";
-      # TODO: change to nvim
-      v = "${pkgs.vim}/bin/vim";
-    };
-
-    historyControl = ["erasedups"];
-    historyIgnore = [
-      "ls"
-      "cd"
-      "exit"
-      "gg"
-    ];
-
-    initExtra = ''
-      bind -f ${./inputrc}
-    '';
-  };
 }
