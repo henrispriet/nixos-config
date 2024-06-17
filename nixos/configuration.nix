@@ -144,6 +144,7 @@
 
   # Stylix
   # TODO: move to stylix file/folder
+  stylix.enable = true;
   stylix.polarity = "dark";
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
   stylix.image = ./spaceship.jpg;
