@@ -97,10 +97,6 @@
       "gg"
     ];
 
-    bashrcExtra = ''
-      . ${./direnv-hook.sh}
-    '';
-
     initExtra = ''
       bind -f ${./inputrc}
     '';
