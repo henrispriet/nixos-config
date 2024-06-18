@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  inputs,
   ...
 }: {
   # Home Manager needs a bit of information about you and the paths it should
@@ -69,16 +70,15 @@
   #
   #  /etc/profiles/per-user/henri/etc/profile.d/hm-session-vars.sh
   #
-  home.sessionVariables = {
-    # doesn't actually work for some reason
-    EDITOR = "vim";
-  };
+  home.sessionVariables = {};
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
   imports = [
     ./bash/bash.nix
+    inputs.nixvim.homeManagerModules.nixvim
+    ./nvim/nvim.nix
   ];
 
   # TODO: write module for vencord to auto import/export config to make it ~declarative~
