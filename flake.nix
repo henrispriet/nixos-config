@@ -7,8 +7,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     stylix.url = "github:danth/stylix";
     nixvim.url = "github:nix-community/nixvim";
-    # TODO: uncomment once https://github.com/nix-community/nixvim/pull/1719 lands
-    # nixvim.inputs.nixpkgs.follows = "nixpkgs";
+    nixvim.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
