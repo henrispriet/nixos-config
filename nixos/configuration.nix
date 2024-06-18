@@ -129,6 +129,7 @@
     ripgrep
     bat
     direnv
+    rr
 
     # desktop apps
     librewolf
