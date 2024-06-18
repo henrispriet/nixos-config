@@ -76,9 +76,9 @@
   programs.home-manager.enable = true;
 
   imports = [
-    ./bash/bash.nix
+    ./bash
     inputs.nixvim.homeManagerModules.nixvim
-    ./nvim/nvim.nix
+    ./nvim
   ];
 
   # TODO: write module for vencord to auto import/export config to make it ~declarative~

@@ -4,8 +4,8 @@
 
     defaultEditor = true;
     vimdiffAlias = true;
-    # vimAlias = true;
-    # viAlias = true;
+    vimAlias = true;
+    viAlias = true;
 
     opts = {
       number = true; # Show line numbers
