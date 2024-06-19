@@ -18,7 +18,5 @@
       # Always show the signcolumn, otherwise text would be shifted by gitsigns
       signcolumn = "yes";
     };
-
-    extraPackages = with pkgs; [git lazygit];
   };
 }

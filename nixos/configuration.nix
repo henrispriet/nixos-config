@@ -122,14 +122,14 @@
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     curl
-    git
-    lazygit
     tree
     fd
     ripgrep
     bat
     direnv
     rr
+
+    lazygit
 
     # desktop apps
     librewolf
@@ -140,6 +140,7 @@
     # TODO: put implicitly into rebuild script
     alejandra
     libnotify
+    git
   ];
 
   # Stylix

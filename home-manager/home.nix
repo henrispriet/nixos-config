@@ -79,6 +79,7 @@
     ./bash
     inputs.nixvim.homeManagerModules.nixvim
     ./nvim
+    ./git.nix
   ];
 
   # TODO: write module for vencord to auto import/export config to make it ~declarative~
