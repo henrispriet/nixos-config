@@ -1,20 +1,16 @@
 #!/usr/bin/env bash
 #
 # Adapted from https://gist.github.com/0atman/1a5133b842f929ba4c1e195ee67599d5
-
 # A rebuild script that commits on a successful build
-set -e
+#
+set -euo pipefail
 
-# Edit your config
-# $EDITOR configuration.nix
-
-# cd to your config dir
-pushd ~/nixos-config/
+pushd ~/nixos-config/ > /dev/null
+trap "popd > /dev/null" EXIT
 
 # Early return if no changes were detected (thanks @singiamtel!)
 if git diff --quiet '*.nix'; then
     echo "No changes detected, exiting."
-    popd
     exit 0
 fi
 
@@ -25,26 +21,14 @@ alejandra . &>/dev/null \
 # Shows your changes
 git diff -U0 '*.nix'
 
-echo "NixOS Rebuilding..."
-
-# Rebuild, output simplified errors, log trackebacks
-logfile=$(mktemp)
-echo "(full logs can be found in $logfile)"
-# make sure new files are detected by the rebuild
-git add .
-sudo nixos-rebuild switch --flake .#myNixos &>$logfile || \
-(cat $logfile | grep --color error \
-&& git restore --staged .\
-&& exit 1)
+./build-system.sh \
+  || (git restore --staged . && exit 1)
 
 # Get current generation metadata
 current=$(nixos-rebuild list-generations | grep current | cut -d " " -f 1)
 
 # Commit all changes witih the generation metadata
 git commit -m "generation ${current}"
-
-# Back to where you were
-popd
 
 # Notify all OK!
 notify-send -e "NixOS Rebuilt OK!" --icon=software-update-available
