@@ -5,6 +5,7 @@
     ./buffer.nix
     ./editing.nix
     ./terminal.nix
+    ./noice.nix
   ];
 
   # TODO: module for floating window options

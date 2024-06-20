@@ -5,13 +5,18 @@
       # the symbol under the cursor becomes the only one _not_ highlighted
       flash = {
         enable = true;
+
         modes.search.enabled = true;
+        # is default, but doesn't seem to actually work :P
+        highlight.groups.current = "IncSearch";
       };
 
+      indent-blankline.enable = true;
       conform-nvim.enable = true;
 
       mini = {
         enable = true;
+
         modules = {
           pairs = {};
           comment = {};

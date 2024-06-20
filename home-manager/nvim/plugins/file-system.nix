@@ -3,6 +3,7 @@
     plugins = {
       oil = {
         enable = true;
+
         settings.keymaps = {
           "q" = {
             callback = "actions.close";
@@ -18,6 +19,7 @@
       # TODO: make picker actually look nice because rn it looks like doodoo
       telescope = {
         enable = true;
+
         settings.defaults = {
           mappings = {
             # close Telescope window with one press of <esc> instead of two
@@ -44,6 +46,7 @@
         options.desc = "Find Files";
         key = "<leader><space>";
         # custom picker that recursively list all files and dirs under cwd and includes cwd as "./"
+        # TODO: move to file?
         action.__raw = ''
           function(opts)
             opts = opts or {}
@@ -69,8 +72,12 @@
             local action_state = require("telescope.actions.state")
             opts.attach_mappings = function(prompt_bufnr, map)
               actions.select_default:replace(function()
-                actions.close(prompt_bufnr)
                 local selection = action_state.get_selected_entry()
+                if selection == nil then
+                  return
+                end
+
+                actions.close(prompt_bufnr)
                 local path = "./"..selection[1]
 
                 if path:match("/$") then

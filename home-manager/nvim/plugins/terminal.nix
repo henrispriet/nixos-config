@@ -1,12 +1,13 @@
-{...}: {
+{pkgs, ...}: {
   programs.nixvim = {
     plugins.toggleterm = {
       enable = true;
 
       settings = {
         direction = "float";
-        # FIXME: figure out how to write this keybind
-        open_mapping.__raw = "[[<C-/>]]";
+        # <C-/> is actually read as <C-_> by (some?) terminal emulators
+        # because terminal emulators are weird
+        open_mapping.__raw = "{ [[<C-/>]], [[<C-_>]] }";
         border = "curved";
       };
     };
@@ -15,7 +16,34 @@
     # https://github.com/akinsho/toggleterm.nvim/?tab=readme-ov-file#custom-terminals
     # + maybe a command to send lines to bg term (BgSendLine)? https://github.com/akinsho/toggleterm.nvim/?tab=readme-ov-file#sending-lines-to-the-terminal
 
-    # TODO: make :! command run in floating toggleterm window
-    # https://github.com/akinsho/toggleterm.nvim/?tab=readme-ov-file#termexec
+    # TODO: make :! map to Do
+    userCommands."Do" = {
+      desc = "Run a shell command";
+      nargs = "+";
+      command.__raw = let
+        postCommand = pkgs.writeShellScript "check-return" ''
+          EXIT=$?
+          if [[ $EXIT == 0 ]]; then
+            # green
+            col="\e[32m"
+          else
+            # red
+            col="\e[31m"
+          fi
+          echo -en $col"exited with code $EXIT - press ENTER to continue\e[0m"
+          read -s
+        '';
+      in ''
+        -- https://github.com/akinsho/toggleterm.nvim/?tab=readme-ov-file#custom-terminals
+        function(command)
+          require('toggleterm.terminal').Terminal:new({
+            cmd = command.args.."; . ${postCommand}",
+            display_name = command.fargs[1],
+            direction = "float",
+            close_on_exit = true,
+          }):toggle()
+        end
+      '';
+    };
   };
 }
