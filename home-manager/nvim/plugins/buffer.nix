@@ -5,13 +5,6 @@
       lualine.enable = true;
     };
 
-    # TODO: add BufferTrim function
-    # opens checklist style floating window
-    # select which buffers to delete (with <space>/<cr>)
-    # "a" to toggle all
-    # commit with TBD, cancel with q/<esc>
-    # confirm on commit (like oil.nvim)
-
     keymaps = [
       {
         options.desc = "Next buffer";
@@ -27,6 +20,11 @@
         options.desc = "Pick buffer";
         key = "gb";
         action = "<cmd>BufferLinePick<cr>";
+      }
+      {
+        options.desc = "Delete buffers";
+        key = "<leader>d";
+        action.__raw = builtins.readFile ./telescope-pickers/delete_buffers.lua;
       }
     ];
   };

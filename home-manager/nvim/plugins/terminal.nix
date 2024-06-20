@@ -17,6 +17,7 @@
     # + maybe a command to send lines to bg term (BgSendLine)? https://github.com/akinsho/toggleterm.nvim/?tab=readme-ov-file#sending-lines-to-the-terminal
 
     # TODO: make :! map to Do
+    # possible via autocmds?
     userCommands."Do" = {
       desc = "Run a shell command";
       nargs = "+";
@@ -25,12 +26,12 @@
           EXIT=$?
           if [[ $EXIT == 0 ]]; then
             # green
-            col="\e[32m"
+            color="\e[32m"
           else
             # red
-            col="\e[31m"
+            color="\e[31m"
           fi
-          echo -en $col"exited with code $EXIT - press ENTER to continue\e[0m"
+          echo -en $color"exited with code $EXIT - press ENTER to continue\e[0m"
           read -s
         '';
       in ''

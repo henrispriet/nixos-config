@@ -4,6 +4,7 @@
       oil = {
         enable = true;
 
+        settings.skip_confirm_for_simple_edits = true;
         settings.keymaps = {
           "q" = {
             callback = "actions.close";
@@ -45,61 +46,7 @@
       {
         options.desc = "Find Files";
         key = "<leader><space>";
-        # custom picker that recursively list all files and dirs under cwd and includes cwd as "./"
-        # TODO: move to file?
-        action.__raw = ''
-          function(opts)
-            opts = opts or {}
-
-            opts.entry_maker = opts.entry_maker or require("telescope.make_entry").gen_from_file(opts)
-            -- leave file paths as is (ensures trailing '/' for dirs)
-            opts.path_display = function(_, path)
-              return path
-            end
-
-            -- make sure ./ is included
-            opts.results = opts.entry_maker("./")
-            local finder = require("telescope.finders.async_oneshot_finder")({
-              fn_command = function()
-                return { command = "fd" }
-              end,
-              entry_maker = opts.entry_maker,
-              results = { opts.entry_maker("./") },
-            })
-
-            -- open directories in oil floating window
-            local actions = require("telescope.actions")
-            local action_state = require("telescope.actions.state")
-            opts.attach_mappings = function(prompt_bufnr, map)
-              actions.select_default:replace(function()
-                local selection = action_state.get_selected_entry()
-                if selection == nil then
-                  return
-                end
-
-                actions.close(prompt_bufnr)
-                local path = "./"..selection[1]
-
-                if path:match("/$") then
-                  vim.cmd([[Oil --float ]]..path)
-                else
-                  vim.cmd([[edit ]]..path)
-                end
-              end)
-              return true
-            end
-
-            local conf = require("telescope.config").values
-            require("telescope.pickers")
-              .new(opts, {
-                prompt_title = "Find Files",
-                finder = finder,
-                previewer = conf.file_previewer(opts),
-                sorter = conf.file_sorter(opts),
-              })
-              :find()
-          end
-        '';
+        action.__raw = builtins.readFile ./telescope-pickers/find_files_and_dirs.lua;
       }
     ];
 
