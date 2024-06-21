@@ -4,6 +4,7 @@
 
     shellAliases = {
       ls = "${pkgs.lsd}/bin/lsd";
+      tree = "${pkgs.lsd}/bin/lsd --tree";
       gg = "${pkgs.lazygit}/bin/lazygit";
       # TODO: absolute path?
       v = "nvim";
