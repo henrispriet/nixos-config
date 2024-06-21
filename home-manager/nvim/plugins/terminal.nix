@@ -21,6 +21,7 @@
     userCommands."Do" = {
       desc = "Run a shell command";
       nargs = "+";
+      complete = "shellcmd";
       command.__raw = let
         postCommand = pkgs.writeShellScript "check-return" ''
           EXIT=$?

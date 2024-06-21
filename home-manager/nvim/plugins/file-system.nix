@@ -4,14 +4,17 @@
       oil = {
         enable = true;
 
-        settings.skip_confirm_for_simple_edits = true;
+        settings.constrain_cursor = "name";
+        settings.experimental_watch_for_changes = true;
         settings.keymaps = {
           "q" = {
-            callback = "actions.close";
+            # has to be : instead of <cmd> otherwise oil doesn't do the right thing
+            callback = ":wq<cr>";
             nowait = true;
           };
           "<esc>" = {
-            callback = "actions.close";
+            # has to be : instead of <cmd> otherwise oil doesn't do the right thing
+            callback = ":wq<cr>";
             mode = "n";
           };
         };

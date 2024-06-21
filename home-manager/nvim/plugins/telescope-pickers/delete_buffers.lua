@@ -48,9 +48,6 @@ function(opts)
   -- adapted from https://github.com/axieax/urlview.nvim/blob/main/lua/urlview/pickers.lua
   local attach_mappings = function(prompt_bufnr, map)
     map({ "i", "n" }, "<C-a>", actions.toggle_all)
-    map({ "i", "n" }, "<cr>", actions.toggle_selection)
-    -- probably gonna change this, tho if youre reading this...
-    map({ "i", "n" }, "<del>", actions.select_default)
 
     actions.select_default:replace(function()
       local picker = action_state.get_current_picker(prompt_bufnr)
