@@ -16,6 +16,7 @@
       "cd"
       "exit"
       "gg"
+      "clear"
     ];
 
     initExtra = ''
