@@ -2,8 +2,32 @@
   programs.nixvim = {
     plugins = {
       gitsigns.enable = true;
-      # TODO: replace with toggleterm???
-      lazygit.enable = true;
+
+      lazygit = {
+        enable = true;
+
+        settings = {
+          # HACK: nixvim wants this to be a bool (https://github.com/nix-community/nixvim/blob/main/plugins/git/lazygit.nix#L45),
+          # but in lazygit.nvim the option is checked against 1 (https://github.com/kdheepak/lazygit.nvim/blob/main/lua/lazygit.lua#L96)
+          use_custom_config_file_path.__raw = "1";
+          config_file_path = builtins.toString (pkgs.writeText "nvim-lazygit-config.yml" ''
+            gui:
+              border: single
+            notARepository: quit
+          '');
+
+          floating_window_border_chars = [
+            "╭"
+            "─"
+            "╮"
+            "│"
+            "╯"
+            "─"
+            "╰"
+            "│"
+          ];
+        };
+      };
     };
 
     keymaps = [
