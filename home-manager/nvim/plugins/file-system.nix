@@ -1,38 +1,51 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  float-styling,
+  ...
+}: {
   programs.nixvim = {
     plugins = {
       oil = {
         enable = true;
 
-        settings.constrain_cursor = "name";
-        settings.experimental_watch_for_changes = true;
-        settings.keymaps = {
-          "q" = {
-            # has to be : instead of <cmd> otherwise oil doesn't do the right thing
-            callback = ":wq<cr>";
-            nowait = true;
-          };
-          "<esc>" = {
-            # has to be : instead of <cmd> otherwise oil doesn't do the right thing
-            callback = ":wq<cr>";
-            mode = "n";
-          };
-        };
-      };
+        settings = {
+          constrain_cursor = "name";
+          experimental_watch_for_changes = true;
 
-      # TODO: make picker actually look nice because rn it looks like doodoo
-      telescope = {
-        enable = true;
+          # why, oil.nvim, do you make me set all of these seperately?
+          # (i mean i get it but cmon)
+          # but mostly why is float different (and worse, i mean only ints for size?) ;-;
+          float = with float-styling; {
+            border = border.name;
+            max_width = size.width;
+            max_height = size.height;
+          };
+          preview = with float-styling; {
+            # width = size.scalingFactor;
+            # height = size.scalingFactor;
+            border = border.name;
+          };
+          progress.border = float-styling.border.name;
+          ssh.border = float-styling.border.name;
+          keymaps_help.border = float-styling.border.name;
 
-        settings.defaults = {
-          mappings = {
-            # close Telescope window with one press of <esc> instead of two
-            i = {
-              "<esc>".__raw = ''require("telescope.actions").close'';
+          keymaps = {
+            "q" = {
+              # has to be : instead of <cmd> otherwise oil doesn't do the right thing
+              callback = ":wq<cr>";
+              nowait = true;
+            };
+            "<esc>" = {
+              # has to be : instead of <cmd> otherwise oil doesn't do the right thing
+              callback = ":wq<cr>";
+              mode = "n";
             };
           };
         };
       };
+
+      # for custom file picker
+      telescope.enable = true;
     };
 
     keymaps = [
@@ -53,6 +66,7 @@
       }
     ];
 
+    # for custom file picker
     extraPackages = [pkgs.fd];
   };
 }

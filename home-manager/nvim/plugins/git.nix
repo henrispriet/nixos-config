@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  float-styling,
+  ...
+}: {
   programs.nixvim = {
     plugins = {
       gitsigns.enable = true;
@@ -6,16 +10,10 @@
       lazygit = {
         enable = true;
 
-        settings.floating_window_border_chars = [
-          "╭"
-          "─"
-          "╮"
-          "│"
-          "╯"
-          "─"
-          "╰"
-          "│"
-        ];
+        settings = with float-styling; {
+          floating_window_border_chars = with border.chars; [topLeft horizontal topRight vertical bottomRight horizontal bottomLeft vertical];
+          floating_window_scaling_factor = size.scalingFactor;
+        };
       };
     };
 

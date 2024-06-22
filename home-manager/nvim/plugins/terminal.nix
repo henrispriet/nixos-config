@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  float-styling,
+  ...
+}: {
   programs.nixvim = {
     plugins.toggleterm = {
       enable = true;
@@ -8,7 +12,12 @@
         # <C-/> is actually read as <C-_> by (some?) terminal emulators
         # because terminal emulators are weird
         open_mapping.__raw = "{ [[<C-/>]], [[<C-_>]] }";
-        border = "curved";
+
+        float_opts = with float-styling; {
+          border = border.name;
+          width = size.width;
+          height = size.height;
+        };
       };
     };
 

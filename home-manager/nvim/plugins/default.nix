@@ -6,11 +6,8 @@
     ./editing.nix
     ./terminal.nix
     ./noice.nix
+    ./telescope.nix
   ];
-
-  # TODO: module for floating window options
-  # (style, width, height, ...)
-  # so that the floating windows from different plugins look cohesive
 
   # TODO: fix conflicting keymaps
 

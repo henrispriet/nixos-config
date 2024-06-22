@@ -1,8 +1,11 @@
-{...}: {
+{float-styling, ...}: {
   programs.nixvim = {
     plugins = {
       bufferline.enable = true;
       lualine.enable = true;
+
+      # for delete buffer picker
+      telescope.enable = true;
     };
 
     keymaps = [
