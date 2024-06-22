@@ -16,6 +16,16 @@
 
       # Highlight the current line
       cursorline = true;
+
+      # better buffer splitting
+      splitright = true;
+      splitbelow = true;
+
+      # Undo and backup options
+      backup = false;
+      writebackup = false;
+      undofile = true;
+      swapfile = true;
     };
 
     # System clipboard support

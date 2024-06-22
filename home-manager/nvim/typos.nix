@@ -7,6 +7,10 @@
         key = "q:";
         action = "<cmd>q<cr>";
       }
+      {
+        key = "<f1>";
+        action = "";
+      }
     ];
 
     userCommands = {
