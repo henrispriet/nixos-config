@@ -7,8 +7,6 @@
         enable = true;
 
         modes.search.enabled = true;
-        # is default, but doesn't seem to actually work :P
-        highlight.groups.current = "IncSearch";
       };
 
       indent-blankline.enable = true;
@@ -52,6 +50,27 @@
               ];
           };
         };
+      };
+    };
+
+    # nvim inverts the highlight bg and fg of the character under the cursor
+    # so give Flash hightlights (`FlashMatch`) a "bright" fg
+    highlightOverride = let
+      fg.__raw = ''require("base16-colorscheme").colors.base0F'';
+      yellow.__raw = ''require("base16-colorscheme").colors.base0A'';
+      orange.__raw = ''require("base16-colorscheme").colors.base09'';
+    in {
+      FlashCurrent = {
+        inherit fg;
+        bg = orange;
+      };
+      FlashMatch = {
+        inherit fg;
+        bg = yellow;
+      };
+      FlashLabel = {
+        inherit fg;
+        bg = yellow;
       };
     };
   };
