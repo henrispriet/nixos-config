@@ -11,6 +11,7 @@
     enable = true;
 
     settings = {
+      gui.border = "single";
       notARepository = "quit";
     };
   };
