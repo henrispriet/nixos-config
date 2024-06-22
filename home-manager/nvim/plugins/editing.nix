@@ -12,7 +12,6 @@
       };
 
       indent-blankline.enable = true;
-      conform-nvim.enable = true;
 
       mini = {
         enable = true;
@@ -51,14 +50,5 @@
           ];
       };
     };
-
-    keymaps = [
-      {
-        options.desc = "Format buffer";
-        key = "<C-s>";
-        # FIXME: this does nothing
-        action = ''<cmd>lua require("conform").format()<cr>'';
-      }
-    ];
   };
 }
