@@ -5,6 +5,10 @@ set -euo pipefail
 pushd ~/nixos-config/ > /dev/null
 trap "popd > /dev/null && git restore --staged ." EXIT
 
+# format
+alejandra . &>/dev/null \
+  || (alejandra . ; echo "formatting failed!" && exit 1)
+
 echo "NixOS Rebuilding..."
 # make sure new files are detected by the rebuild
 git add .
