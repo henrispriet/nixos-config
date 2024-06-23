@@ -5,7 +5,6 @@
     ./buffer.nix
     ./editing.nix
     ./terminal.nix
-    ./noice.nix
     ./telescope.nix
   ];
 
