@@ -1,8 +1,13 @@
-{lib, ...}: {
+{
+  getColor,
+  lib,
+  ...
+}: {
   programs.nixvim = {
+    # TODO: autocmd to highlight yanked region
+    # https://www.reddit.com/r/neovim/comments/gofplz/comment/g5sgtjp/
+
     plugins = {
-      # TODO: make highligthing in flash mode better
-      # the symbol under the cursor becomes the only one _not_ highlighted
       flash = {
         enable = true;
 
@@ -56,9 +61,9 @@
     # nvim inverts the highlight bg and fg of the character under the cursor
     # so give Flash hightlights (`FlashMatch`) a "bright" fg
     highlightOverride = let
-      fg.__raw = ''require("base16-colorscheme").colors.base0F'';
-      yellow.__raw = ''require("base16-colorscheme").colors.base0A'';
-      orange.__raw = ''require("base16-colorscheme").colors.base09'';
+      fg = getColor "0F";
+      yellow = getColor "0A";
+      orange = getColor "09";
     in {
       FlashCurrent = {
         inherit fg;

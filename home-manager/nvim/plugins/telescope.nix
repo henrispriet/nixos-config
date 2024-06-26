@@ -1,8 +1,4 @@
-{
-  lib,
-  float-styling,
-  ...
-}: {
+{float-styling, ...}: {
   programs.nixvim = {
     plugins.telescope = {
       enable = true;
@@ -33,17 +29,8 @@
     # i mean why, base16-colorscheme? what did telescope borders ever do to you?
     # NOTE: also have to reset the colors because stylix colortheme init comes before nixvim extraConfigLuaPre ;-;
     # otherwise i could just call with_config before setup :(
-    extraConfigLuaPre = let
-      colors = with lib;
-        pipe "0123456789ABCDEF" [
-          stringToCharacters
-          (map (n: "base0${n} = b16.colors.base0${n}"))
-          (concatStringsSep ", ")
-        ];
-    in ''
-      local b16 = require("base16-colorscheme")
-      b16.setup({${colors}}, { telescope_borders = true })
-      print()
+    extraConfigLuaPre = ''
+      require("base16-colorscheme").setup(require("base16-colorscheme").colors, { telescope_borders = true })
     '';
   };
 }
