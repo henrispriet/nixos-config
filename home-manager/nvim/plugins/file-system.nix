@@ -37,7 +37,7 @@
             };
             "<esc>" = {
               # has to be : instead of <cmd> otherwise oil doesn't do the right thing
-              callback = ":wq<cr>";
+              callback = ":bd!<cr>";
               mode = "n";
             };
           };

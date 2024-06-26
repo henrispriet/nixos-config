@@ -23,8 +23,7 @@ function(opts)
   end)
 
   local buffers = {}
-  local default_selection_idx = 1
-  for i, bufnr in ipairs(bufnrs) do
+  for _, bufnr in ipairs(bufnrs) do
     local flag = bufnr == vim.fn.bufnr "" and "%" or (bufnr == vim.fn.bufnr "#" and "#" or " ")
 
     local element = {
@@ -44,7 +43,7 @@ function(opts)
     results = buffers,
     entry_maker = make_entry.gen_from_buffer(opts)
   })
-  
+
   -- adapted from https://github.com/axieax/urlview.nvim/blob/main/lua/urlview/pickers.lua
   local attach_mappings = function(prompt_bufnr, map)
     map({ "i", "n" }, "<C-a>", actions.toggle_all)
