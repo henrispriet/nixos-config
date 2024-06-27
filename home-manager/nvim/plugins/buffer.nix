@@ -27,6 +27,7 @@
       {
         options.desc = "Delete buffers";
         key = "<leader>d";
+        # TODO: inline?
         action.__raw = builtins.readFile ./telescope-pickers/delete_buffers.lua;
       }
     ];

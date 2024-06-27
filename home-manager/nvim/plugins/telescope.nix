@@ -19,18 +19,35 @@
         mappings = {
           # close Telescope window with one press of <esc> instead of two
           i = {
-            "<esc>".__raw = ''require("telescope.actions").close'';
+            "<esc>".__raw =
+              /*
+              lua
+              */
+              ''require("telescope.actions").close'';
           };
         };
       };
     };
 
+    keymaps = [
+      {
+        options.desc = "Live Grep";
+        key = "<leader>rg";
+        action = "<cmd>Telescope live_grep<cr>";
+      }
+    ];
+
     # enable telescope borders _in base16-colorscheme_ of all things
     # i mean why, base16-colorscheme? what did telescope borders ever do to you?
     # NOTE: also have to reset the colors because stylix colortheme init comes before nixvim extraConfigLuaPre ;-;
     # otherwise i could just call with_config before setup :(
-    extraConfigLuaPre = ''
-      require("base16-colorscheme").setup(require("base16-colorscheme").colors, { telescope_borders = true })
-    '';
+    extraConfigLuaPre =
+      /*
+      lua
+      */
+      ''
+        local b16 = require("base16-colorscheme")
+        b16.setup(b16.colors, { telescope_borders = true })
+      '';
   };
 }

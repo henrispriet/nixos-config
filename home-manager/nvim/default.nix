@@ -1,4 +1,4 @@
-{lib, ...}: {
+{...}: {
   imports = [
     ./options.nix
     ./keymaps.nix
@@ -7,7 +7,13 @@
     {
       _module.args = {
         float-styling = import ./float-styling.nix;
-        getColor = b: {__raw = ''require("base16-colorscheme").colors.base${b}'';};
+        getColor = b: {
+          __raw =
+            /*
+            lua
+            */
+            ''require("base16-colorscheme").colors.base${b}'';
+        };
       };
     }
   ];

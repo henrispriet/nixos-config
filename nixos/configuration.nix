@@ -131,10 +131,12 @@
     # desktop apps
     librewolf
     vlc
+    # TODO: service that urges me to backup my db
     keepassxc
 
     # required by rebuild script
     # TODO: put implicitly into rebuild script
+    # rebuild script -> writeShellApplication?
     alejandra
     libnotify
     git

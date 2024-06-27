@@ -1,8 +1,16 @@
-rec {
+{
   size = rec {
     scalingFactor = 0.75;
-    width.__raw = ''math.floor(vim.o.columns * ${builtins.toString scalingFactor})'';
-    height.__raw = ''math.floor(vim.o.lines * ${builtins.toString scalingFactor})'';
+    width.__raw =
+      /*
+      lua
+      */
+      ''math.floor(vim.o.columns * ${builtins.toString scalingFactor})'';
+    height.__raw =
+      /*
+      lua
+      */
+      ''math.floor(vim.o.lines * ${builtins.toString scalingFactor})'';
   };
 
   border = let

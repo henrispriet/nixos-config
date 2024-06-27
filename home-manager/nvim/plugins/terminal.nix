@@ -11,7 +11,11 @@
         direction = "float";
         # <C-/> is actually read as <C-_> by (some?) terminal emulators
         # because terminal emulators are weird
-        open_mapping.__raw = "{ [[<C-/>]], [[<C-_>]] }";
+        open_mapping.__raw =
+          /*
+          lua
+          */
+          "{ [[<C-/>]], [[<C-_>]] }";
 
         float_opts = with float-styling; {
           border = border.name;
@@ -45,17 +49,21 @@
           echo -en $color"exited with code $EXIT - press ENTER to continue\e[0m"
           read -s
         '';
-      in ''
-        -- https://github.com/akinsho/toggleterm.nvim/?tab=readme-ov-file#custom-terminals
-        function(command)
-          require('toggleterm.terminal').Terminal:new({
-            cmd = "bash -ic '"..command.args.."; . ${postCommand}'",
-            display_name = command.fargs[1],
-            direction = "float",
-            close_on_exit = true,
-          }):toggle()
-        end
-      '';
+      in
+        /*
+        lua
+        */
+        ''
+          -- https://github.com/akinsho/toggleterm.nvim/?tab=readme-ov-file#custom-terminals
+          function(command)
+            require('toggleterm.terminal').Terminal:new({
+              cmd = "bash -ic '"..command.args.."; . ${postCommand}'",
+              display_name = command.fargs[1],
+              direction = "float",
+              close_on_exit = true,
+            }):toggle()
+          end
+        '';
     };
   };
 }

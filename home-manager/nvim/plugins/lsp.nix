@@ -16,13 +16,17 @@
     # set diagnostic signs
     # https://smarttech101.com/nvim-lsp-diagnostics-keybindings-signs-virtual-texts/#severity_signs_in_nvim_lsp_diagnostics
     # https://github.com/nvim-lualine/lualine.nvim/blob/master/lua/lualine/components/diagnostics/config.lua#L8-L12
-    extraConfigLua = ''
-      local signs = { Error = "󰅚 ", Warn = "󰀪 ", Hint = "󰌶 ", Info = "󰋽 " }
-      for type, icon in pairs(signs) do
-        local hl = "DiagnosticSign" .. type
-        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-      end
-    '';
+    extraConfigLua =
+      /*
+      lua
+      */
+      ''
+        local signs = { Error = "󰅚 ", Warn = "󰀪 ", Hint = "󰌶 ", Info = "󰋽 " }
+        for type, icon in pairs(signs) do
+          local hl = "DiagnosticSign" .. type
+          vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+        end
+      '';
 
     plugins.lsp = {
       enable = true;
@@ -60,23 +64,34 @@
         modes.cascade = {
           mode = "diagnostics"; # inherit from diagnostics mode
           # NOTE: why does this get formatted so strangely? ;-;
-          filter.__raw = ''
-               function(items)
-                 local severity = vim.diagnostic.severity.HINT
-                 for _, item in ipairs(items) do
-            severity = math.min(severity, item.severity)
-                 end
-                 return vim.tbl_filter(function(item)
-            return item.severity == severity
-                 end, items)
-               end
-          '';
+          filter.__raw =
+            /*
+            lua
+            */
+            ''
+              function(items)
+                local severity = vim.diagnostic.severity.HINT
+                for _, item in ipairs(items) do
+                  severity = math.min(severity, item.severity)
+                end
+                return vim.tbl_filter(
+                  function(item)
+                    return item.severity == severity
+                  end,
+                  items
+                )
+              end
+            '';
         };
 
         # HACK: folke does not seem to like people disabling his keybinds i guess, jeez
         keys = let
           disable = {
-            action.__raw = ''function() end'';
+            action.__raw =
+              /*
+              lua
+              */
+              ''function() end'';
             desc = "-";
           };
         in {

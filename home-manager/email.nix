@@ -1,4 +1,6 @@
 {...}: {
+  # FIXME: why do i need to log in with my password every time?
+
   programs.thunderbird = {
     enable = true;
 
