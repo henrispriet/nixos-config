@@ -13,7 +13,17 @@
       DiagnosticUnderlineHint = underline // {sp = getColor "0C";};
     };
 
-    # TODO: set diagnostic signs
+    # set diagnostic signs
+    # https://smarttech101.com/nvim-lsp-diagnostics-keybindings-signs-virtual-texts/#severity_signs_in_nvim_lsp_diagnostics
+    # https://github.com/nvim-lualine/lualine.nvim/blob/master/lua/lualine/components/diagnostics/config.lua#L8-L12
+    extraConfigLua = ''
+      local signs = { Error = "󰅚 ", Warn = "󰀪 ", Hint = "󰌶 ", Info = "󰋽 " }
+      for type, icon in pairs(signs) do
+        local hl = "DiagnosticSign" .. type
+        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+      end
+    '';
+
     plugins.lsp = {
       enable = true;
 

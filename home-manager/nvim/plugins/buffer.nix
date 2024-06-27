@@ -1,4 +1,4 @@
-{float-styling, ...}: {
+{...}: {
   programs.nixvim = {
     plugins = {
       bufferline.enable = true;
