@@ -6,8 +6,7 @@
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     stylix.url = "github:danth/stylix";
-    nixvim.url = "github:nix-community/nixvim";
-    nixvim.inputs.nixpkgs.follows = "nixpkgs";
+    nixvim-config.url = "github:henrispriet/nixvim-config";
   };
 
   outputs = {
@@ -28,8 +27,7 @@
     nixosConfigurations = {
       myNixos = nixpkgs.lib.nixosSystem {
         specialArgs = {
-          inherit system;
-          inherit inputs;
+          inherit system inputs pkgs;
         };
 
         # extraSpecialArgs = {inherit inputs;};
@@ -40,9 +38,5 @@
         ];
       };
     };
-
-    homeManagerModules.default = [
-      inputs.nixvim.homeManagerModules.nixvim
-    ];
   };
 }

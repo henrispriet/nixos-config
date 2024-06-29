@@ -1,4 +1,9 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  system,
+  ...
+}: {
   programs.bash = {
     enable = true;
 
@@ -6,8 +11,7 @@
       ls = "${pkgs.lsd}/bin/lsd";
       tree = "${pkgs.lsd}/bin/lsd --tree";
       gg = "${pkgs.lazygit}/bin/lazygit";
-      # TODO: absolute path?
-      v = "nvim";
+      v = "${inputs.nixvim-config.packages.${system}.default}/bin/nvim";
     };
 
     historyControl = ["erasedups"];
